@@ -53,7 +53,6 @@ char* convertBase16( uint decVal ) {
     exit( EXIT_FAILURE );
   }
 
-  char buff[nDigits];
   for( uint k = nDigits; k > 0u; --k ) {
     binVal[k-1] = hex[decVal % 16u];
     decVal /= 16u;
