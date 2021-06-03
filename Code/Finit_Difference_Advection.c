@@ -9,7 +9,7 @@ int main(){
     double du[nx];
     //intial setting
     
-    for(int i=0; i<=100;i++){
+    for(int i=0; i<=99;i++){
         u[i]=0; //initial field u
         for(int j=20;j<60;j++){
             u[j]=1;
@@ -17,10 +17,10 @@ int main(){
        
         }
 
-    //move the media by distance of 0.5c
-    int type = 0; //0=centered, 1=upwind
+    //move the media by distance of 0.5, 
+    int type = 1; //0=centered, 1=upwind
 
-    for(int i=1; i<=100;i++){
+    for(int i=0; i<=99;i++){
      du[i] = 0.0; //initialie du
      for(int j=1;j<=99;j++){
         if(type==0){
@@ -34,15 +34,47 @@ int main(){
         }
         new_u[j] = u[j]-dt*v*du[j];
      }
-    }
     //Boundary Conditions
     new_u[100] = 0;
     new_u[0] = 0;
+    }
+
+/*    
     printf( "u             new u\n" );
     printf( "-------------------\n" );
     for(int i = 0; i <= 100; i++ ) {
-    printf( " %f | %f\n", u[i],new_u[i]);
-  }
+    printf( " %f | %f\n", u[i],new_u[i]); 
+    }
+*/
 
+// iteration 
+double new2_u[nx+1];
+for(int i=0; i<=99;i++){
+    du[i] = 0.0; //initialie du
+     for(int j=1;j<=99;j++){
+        if(type==0){
+            du[j]=(new_u[j+1]-new_u[j-1])/(2.0*dx);
+        }
+        else if(type==1){
+            du[j]=(new_u[j]-new_u[j-1])/dx;
+        }
+        else{
+            printf("correct form: centered or upwind");
+        }
+        new2_u[j] = new_u[j]-dt*v*du[j];
+}
+    //Boundary Conditions
+new2_u[100] = 0;
+new2_u[0] = 0;
+}
+
+printf( "u         new          new_2 u\n" );
+printf( "------------------------------\n" );
+for(int i = 0; i <= 100; i++ ) {
+    printf( " %f | %f | %f\n", u[i], new_u[i],new2_u[i]); 
+}
+
+//check if the size of u
+printf("%lu\n", sizeof(u)/sizeof(u[0]));
 
 }
