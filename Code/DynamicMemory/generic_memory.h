@@ -41,7 +41,7 @@ T* ARRAY_1D( idx_t init, idx_t last )
   tmp = (T*) calloc( last - init + 1, sizeof(T) );
   if ( tmp == NULL ) {
     fprintf( stderr, "Error in ARRAY_1D !!!\n" );
-    fprintf( stderr, "Could not allocate %lu objectes of size %lu\n\n",
+    fprintf( stderr, "Could not allocate %ld objectes of size %ld\n\n",
 	     last - init + 1, (idx_t)sizeof(T) );
     exit(ERROR_MEMORY);
   }
@@ -123,7 +123,7 @@ T** ARRAY_2D( idx_t x_init, idx_t y_init,
   if ( ( x_size * y_size ) / y_size != x_size ) {
     fprintf( stderr, "Error in ARRAY_2D (level 0)!!!\n" );
     fprintf( stderr, "Product of xrange with yrange is larger than " );
-    fprintf( stderr, "ULONG_MAX\n\n" );
+    fprintf( stderr, "INT64_MAX\n\n" );
     exit(ERROR_MEMORY);
   }
 
@@ -131,7 +131,7 @@ T** ARRAY_2D( idx_t x_init, idx_t y_init,
   tmp = (T**) calloc( x_size, sizeof(T*) );
   if ( tmp == NULL ) {
     fprintf( stderr, "Error in ARRAY_2D (level 1)!!!\n" );
-    fprintf( stderr, "Could not allocate %lu pointers of size %lu\n\n",
+    fprintf( stderr, "Could not allocate %ld pointers of size %ld\n\n",
 	     x_size, (idx_t)sizeof(T*) );
     exit(ERROR_MEMORY);
   }
@@ -143,7 +143,7 @@ T** ARRAY_2D( idx_t x_init, idx_t y_init,
   tmp[x_init] = (T*) calloc( x_size*y_size, sizeof(T) );
   if ( tmp[x_init] == NULL ) {
     fprintf( stderr, "Error in ARRAY_2D (2)!!!\n\n" );
-    fprintf( stderr, "Could not allocate %lu objects of size %lu\n\n",
+    fprintf( stderr, "Could not allocate %ld objects of size %ld\n\n",
 	     x_size*y_size, (idx_t)sizeof(T) );
     exit(ERROR_MEMORY);
   }
@@ -238,13 +238,13 @@ T*** ARRAY_3D( idx_t x_init, idx_t y_init,
   if ( ( x_size * y_size ) / y_size != x_size ) {
     fprintf( stderr, "Error in ARRAY_3D (level 0)!!!\n" );
     fprintf( stderr, "Product of xrange with yrange is larger than " );
-    fprintf( stderr, "ULONG_MAX\n\n" );
+    fprintf( stderr, "INT64_MAX\n\n" );
     exit(ERROR_MEMORY);
   }
   if ( ( x_size * y_size * z_size ) / z_size != x_size * y_size ) {
     fprintf( stderr, "Error in ARRAY_3D (level 0)!!!\n" );
     fprintf( stderr, "Product xrange * yrange * zrange is larger than " );
-    fprintf( stderr, "ULONG_MAX\n\n" );
+    fprintf( stderr, "INT64_MAX\n\n" );
     exit(ERROR_MEMORY);
   }
 
@@ -252,7 +252,7 @@ T*** ARRAY_3D( idx_t x_init, idx_t y_init,
   tmp = (T***) calloc( x_size, sizeof(T**) );
   if ( tmp == NULL ) {
     fprintf( stderr, "Error in ARRAY_3D (1)!!!\n" );
-    fprintf( stderr, "Could not allocate %lu pointers of size %lu\n\n",
+    fprintf( stderr, "Could not allocate %ld pointers of size %ld\n\n",
 	     x_size, (idx_t)sizeof(T**) );
     exit(ERROR_MEMORY);
   }
@@ -264,7 +264,7 @@ T*** ARRAY_3D( idx_t x_init, idx_t y_init,
   tmp[x_init] = (T**) calloc( x_size*y_size, sizeof(T*) );
   if ( tmp[x_init] == NULL ) {
     fprintf( stderr, "Error in ARRAY_3D (2)!!!\n" );
-    fprintf( stderr, "Could not allocate %lu pointers of size %lu\n\n",
+    fprintf( stderr, "Could not allocate %ld pointers of size %ld\n\n",
 	     x_size*y_size, (idx_t)sizeof(T*) );
   }
 
@@ -275,7 +275,7 @@ T*** ARRAY_3D( idx_t x_init, idx_t y_init,
   tmp[x_init][y_init] = (T*) calloc( x_size*y_size*z_size, sizeof(T) );
   if ( tmp[x_init][y_init] == NULL ) {
     fprintf( stderr, "Error in ARRAY_3D (3)!!!\n" );
-    fprintf( stderr, "Could not allocate %lu objects of size %lu\n\n",
+    fprintf( stderr, "Could not allocate %ld objects of size %ld\n\n",
 	     x_size*y_size*z_size, (idx_t)sizeof(T) );
     exit(ERROR_MEMORY);
   }
