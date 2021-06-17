@@ -7,6 +7,9 @@
 char* genFileName( char* bname, int step, int maxsteps ){
   int bLen = strlen(bname);
   int nLen = (int)log10((double)maxsteps)+1;
+  //alternative: sprintf(fmt,"%d",maxsteps);
+  //int nLen = strlen(fmt);
+
   int sLen = bLen + nLen +1 +1 +4;
   sLen++; //string terminater
 
@@ -26,7 +29,7 @@ char* genFileName( char* bname, int step, int maxsteps ){
 
 int main( void ) {
 
-  char* fName = NULL;
+  char* fName = NULL; // already defined in subfunction genFileName, is this necessary?
 
   fName = genFileName( "iteration", 9, 12 );
   printf( "--> '%s'\n", fName );
