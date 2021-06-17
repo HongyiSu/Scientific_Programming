@@ -4,7 +4,24 @@
 #include <math.h>
 
 
-char* genFileName( char* bname, int step, int maxsteps );
+char* genFileName( char* bname, int step, int maxsteps ){
+  int bLen = strlen(bname);
+  int nLen = (int)log10((double)maxsteps)+1;
+  int sLen = bLen + nLen +1 +1 +4;
+  sLen++; //string terminater
+
+  //allocate memory
+  char* fName = malloc(sLen*sizeof(char));
+  if( fName == NULL){
+    exit(-1);
+  }
+
+  char fmt[80];
+  sprintf(fmt, "%%s-%%%d.%dd.data",nLen,nLen);
+  //generate filename
+  sprintf(fName, fmt, bname, step);
+  return fName;
+  }
 
 
 int main( void ) {
@@ -24,20 +41,4 @@ int main( void ) {
   free( fName );
 
   return EXIT_SUCCESS;
-}
-
-
-char* genFileName( char* bName, int step, int maxSteps ) {
-  
-  // Step 1: determine length of composed filename
-
-  // Step 2: allocate memory
-
-  // Step 3: assemble format specification
-  char fmt[80];
-  // sprintf( fmt, ..... );
-
-  // Step 4: generate filename
-
-  return fName;
 }
