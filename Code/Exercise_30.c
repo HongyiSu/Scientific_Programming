@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h> 
 
 int main(){
 
@@ -11,8 +12,33 @@ double r;
 printf("input the relaxation parameter(0-2):");
 scanf("%lf", &r);
 
+//prepare data file for printing
+FILE *of=NULL;
+of=fopen("Exercise_30.dat","w");
+if(of == NULL){
+    printf("Problem opening datafile!\n");
+    exit(7);
+}
+
+//memory allocation
+double** array;
+double* ptr;
+double len=0.0;
+len=sizeof(double *)*N+sizeof(double)*N*N;
+array=(double **)malloc(len);
+if (array == NULL) {
+        printf("Memory not allocated.\n");
+        exit(0);
+    }
+ptr = (double*)(array + N);
+
+for(i=0;i<N;i++)
+{
+    array[i] = (ptr + N*i);
+}
+
+
 //set up BC
-double array[N][N];
 for(i=0;i<N;i++){
     array[i][0]=0.0;
    // printf("array[%d][0] = %f\n", i,array[i][0]);
@@ -61,6 +87,7 @@ while(iter <= 400){
         break;
     }
     printf("correction at iteration %d: %f\n", iter, correction);
+    fprintf(of,"%d\t%e\n", iter, correction);
     sum_0 = sum;
 }
 
